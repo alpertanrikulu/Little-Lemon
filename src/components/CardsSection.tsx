@@ -1,57 +1,47 @@
+import Card from "./Card"
+import GreekSalad from "../assets/greek salad.jpg"
+import Bruchetta from "../assets/Bruchetta.jpg"
+import LemonDessert from "../assets/lemon dessert.jpg"
 
-import { Package } from 'lucide-react'
-import GreekSalad from "../assets/icons_assets/greek salad.jpg"
 
 const CardsSection = () => {
+  const cardContents = [
+    {
+      image: GreekSalad,
+      title: "Greek Salad",
+      price: "12.99",
+      description: `It look like readable English. 
+      Many desktop publishing packages and web page 
+      editors now use Lorem Ipsum as their default model 
+      text, and a search`
+    },
+    {
+      image: Bruchetta, // buradaki resmi önce import etmen lazım
+      title: "Bruchetta",
+      price: "16.99",
+      description: `Toasted bread topped with garlic, 
+      tomatoes, olive oil, and fresh basil. 
+      A classic Italian appetizer loved worldwide.`
+    },
+    {
+      image: LemonDessert, // resmi import etmeyi unutma
+      title: "Lemon Dessert",
+      price: "8.99",
+      description: `A refreshing lemon-flavored dessert 
+      with a light and creamy texture, 
+      perfect to end your meal on a sweet note.`
+    },
+  ]
   return (
-    <section className='px-[290px] my-[108px]'>
-        <div className='flex justify-between items-center'>
-        <h2 className='font-markazi font-medium text-[64px]'>This Weeks Specials</h2>
-        <a className='bg-lemonyellow text-black text-[18px] font-karla font-medium px-[16px] py-[8px] rounded-[16px]' href="#">Online Menu</a>
+    <section className='max-w-[860px] mx-auto my-[108px]'>
+        <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
+          <h2 className='font-markazi font-medium text-[64px]'>This Weeks Specials</h2>
+          <a className='bg-lemonyellow text-black text-[18px] font-karla font-medium px-[16px] py-[8px] rounded-[16px] mb-[16px] md:mb-[0px] self-startbg-lemonyellow text-black text-[18px] font-karla font-medium px-[16px] py-[8px] rounded-[16px] mb-[16px] md:mb-0 self-center md:self-auto' href="#">Online Menu</a>
         </div>
-        <div id='card' className='flex justify-between items-center'>
-          <div className='w-[240px] bg-lemongray rounded-[16px]'>
-            <img className='rounded-t-[16px]' src={GreekSalad} alt="greek salad" width={240} height={208} />
-            <div className='p-[16px] flex flex-col justify-between gap-[24px]'>
-              <div className='flex justify-between items-center'>
-                <h3 className='font-karla font-bold text-[18px]'>Greek Salad</h3>
-                <p className='font-karla font-medium text-[16px] text-red-600'>$12.99</p>
-              </div>
-              <p>It look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-              <div className='flex justify-between items-center'>
-                <p>Order Delivery</p>
-                <Package />
-              </div>
-            </div>
-          </div>
-          <div className='w-[240px] bg-lemongray rounded-[16px]'>
-            <img className='rounded-t-[16px]' src={GreekSalad} alt="greek salad" width={240} height={208} />
-            <div className='p-[16px] flex flex-col justify-between gap-[24px]'>
-              <div className='flex justify-between items-center'>
-                <h3 className='font-karla font-bold text-[18px]'>Greek Salad</h3>
-                <p className='font-karla font-medium text-[16px] text-red-600'>$12.99</p>
-              </div>
-              <p>It look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-              <div className='flex justify-between items-center'>
-                <p>Order Delivery</p>
-                <Package />
-              </div>
-            </div>
-          </div>
-          <div className='w-[240px] bg-lemongray rounded-[16px]'>
-            <img className='rounded-t-[16px]' src={GreekSalad} alt="greek salad" width={240} height={208} />
-            <div className='p-[16px] flex flex-col justify-between gap-[24px]'>
-              <div className='flex justify-between items-center'>
-                <h3 className='font-karla font-bold text-[18px]'>Greek Salad</h3>
-                <p className='font-karla font-medium text-[16px] text-red-600'>$12.99</p>
-              </div>
-              <p>It look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-              <div className='flex justify-between items-center'>
-                <p>Order Delivery</p>
-                <Package />
-              </div>
-            </div>
-          </div>
+        <div id='cards' className='flex justify-between items-center'>
+          {cardContents.map((dish, index) => (
+            <Card key={index} image={dish.image} title={dish.title} price={dish.price} description={dish.description} />
+          ))}
         </div>
       </section>
   )
