@@ -1,10 +1,10 @@
 
-import RestaurantFood from "../assets/icons_assets/restauranfood.jpg"
+import RestaurantFood from "../assets/restauranfood.jpg"
 
 const Footer = () => {
   return (
     <footer className='flex py-[36px] bg-lemongreen gap-5 justify-between'>
-      <nav className='flex justify-between text-white font-karla text-[18px] gap-[50px] w-[860px] mx-auto'>
+      <nav className='flex flex-wrap justify-between text-white font-karla text-[18px] gap-[50px] w-[860px] mx-auto px-[10px] md:px-[0px]'>
       <img className='rounded-2xl w-[170px] h-[280px]' src={RestaurantFood} alt="Footer image" width={170} height={280} />
         <ul className='flex flex-col'>
           <li>

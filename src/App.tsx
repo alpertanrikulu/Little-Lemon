@@ -1,21 +1,24 @@
 
 import './App.css'
-import BannerSection from './components/BannerSection'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import CardsSection from './components/CardsSection'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './Home'
+import BookingPage from './BookingPage'
 
 function App() {
 
   return (
-    <>
-    <Header />
-    <main className=''>
-      <BannerSection />
-      <CardsSection />
-    </main>
-    <Footer />
-    </>
+    <BrowserRouter>
+      <Header />
+        <main className=''>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/booking" element={<BookingPage />} />
+          </Routes>
+        </main>
+      <Footer />
+    </BrowserRouter>
   )
 }
 

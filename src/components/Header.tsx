@@ -1,7 +1,8 @@
 
 import { useState } from "react";
-import Logo from "../assets/icons_assets/Logo.svg"
+import Logo from "../assets/Logo.svg"
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -11,22 +12,22 @@ const Header = () => {
       <img src={Logo} alt="Logo" width={147} height={40} className='w-[147px] h-[40px]'/>
         <ul className='hidden md:flex font-karla text-[20px] font-bold justify-between items-center gap-[20px]'>
           <li>
-            <a className='whitespace-nowrap' href="#">HOME</a>
+            <Link className='whitespace-nowrap' to="/">HOME</Link>
           </li>
           <li>
-            <a className='whitespace-nowrap' href="#">ABOUT</a>
+            <Link className='whitespace-nowrap' to="/">ABOUT</Link>
           </li>
           <li>
-            <a className='whitespace-nowrap' href="#">MENU</a>
+            <Link className='whitespace-nowrap' to="/">MENU</Link>
           </li>
           <li>
-            <a className='whitespace-nowrap' href="#">RESERVATIONS</a>
+            <Link className='whitespace-nowrap' to="/">RESERVATIONS</Link>
           </li>
           <li>
-            <a className='whitespace-nowrap' href="#">ORDER ONLINE</a>
+            <Link className='whitespace-nowrap' to="/">ORDER ONLINE</Link>
           </li>
           <li>
-            <a className='whitespace-nowrap' href="#">LOGIN</a>
+            <Link className='whitespace-nowrap' to="/">LOGIN</Link>
           </li>
         </ul>
         {isOpen ? (
@@ -37,22 +38,22 @@ const Header = () => {
         {isOpen && (
         <ul className="md:hidden flex flex-col justify-between absolute top-[50px] right-[10px] border-2 rounded-[16px] p-[16px] font-karla text-[16px] font-medium bg-lemongray">
             <li>
-            <a className='whitespace-nowrap' href="#">HOME</a>
+            <Link className='whitespace-nowrap' to="/">HOME</Link>
             </li>
             <li>
-            <a className='whitespace-nowrap' href="#">ABOUT</a>
+            <Link className='whitespace-nowrap' to="/">ABOUT</Link>
             </li>
             <li>
-            <a className='whitespace-nowrap' href="#">MENU</a>
+            <Link className='whitespace-nowrap' to="/">MENU</Link>
             </li>
             <li>
-            <a className='whitespace-nowrap' href="#">RESERVATIONS</a>
+            <Link className='whitespace-nowrap' to="/">RESERVATIONS</Link>
             </li>
             <li>
-            <a className='whitespace-nowrap' href="#">ORDER ONLINE</a>
+            <Link className='whitespace-nowrap' to="/">ORDER ONLINE</Link>
             </li>
             <li>
-            <a className='whitespace-nowrap' href="#">LOGIN</a>
+            <Link className='whitespace-nowrap' to="/">LOGIN</Link>
             </li>
         </ul>
         )}
