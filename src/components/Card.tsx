@@ -12,8 +12,13 @@ interface Props {
 const Card: React.FC<Props> = ({ image, title, price, description }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newItemCount, setNewItemCount] = useState(0);
+
   return (
-    <div className="w-[250px] bg-lemongray rounded-[16px] h-[500px] flex flex-col justify-between mt-[16px] md:mt-[0px]">
+    <div
+      className="w-[250px] bg-lemongray rounded-[16px] h-[500px] flex flex-col justify-between mt-[16px] md:mt-[0px]"
+      role="article"
+      aria-label={`${title} card, price $${price}`}
+    >
       <img
         className="rounded-t-[16px]"
         src={image}
@@ -42,13 +47,14 @@ const Card: React.FC<Props> = ({ image, title, price, description }) => {
             <h3 className="font-karla font-bold text-[18px] text-green-700">
               Added to Basket
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 text-sm" aria-live="polite">
               Your item has been successfully added.
             </p>
             <button
               data-testid="order-count-button-continue"
               onClick={() => setIsOpen(false)}
               className="font-karla font-medium text-[16px] bg-lemonyellow text-black px-[16px] py-[8px] rounded-[16px] border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black transition"
+              aria-label={`Continue shopping after adding ${title}`}
             >
               Continue Shopping
             </button>
@@ -70,10 +76,21 @@ const Card: React.FC<Props> = ({ image, title, price, description }) => {
                   setNewItemCount((count) => count + 1);
                 }}
                 className="font-karla font-medium text-[16px] bg-lemonyellow text-black px-[16px] py-[8px] rounded-[16px]"
+                aria-label={`Add ${title} to basket`}
               >
                 Add to Basket
               </button>
-              {newItemCount ? <p data-testid="order-count" className="font-karla font-medium text-[18px]">{newItemCount}</p> : <Package />}
+              {newItemCount ? (
+                <p
+                  data-testid="order-count"
+                  className="font-karla font-medium text-[18px]"
+                  aria-live="polite"
+                >
+                  {newItemCount}
+                </p>
+              ) : (
+                <Package aria-label="Package icon" />
+              )}
             </div>
           </>
         )}

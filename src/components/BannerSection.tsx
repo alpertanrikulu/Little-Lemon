@@ -3,7 +3,10 @@ import RestaurantFood from "../assets/restauranfood.jpg";
 
 const BannerSection = () => {
   return (
-    <section className=" bg-lemongreen text-white py-[50px] md:h-[420px]">
+    <section
+      className="bg-lemongreen text-white py-[50px] md:h-[420px]"
+      aria-label="Banner Section with restaurant introduction and reservation link"
+    >
       <div className="flex flex-col md:flex-row justify-between items-center md:items-start max-w-[860px] mx-auto px-[10px] md:px-[0px]">
         <article className="flex flex-col justify-between h-[295px] gap-[20px] max-w-[280px]">
           <div className="font-markazi">
@@ -18,6 +21,7 @@ const BannerSection = () => {
             data-testid="reserve-table-link"
             className="px-[16px] py-[8px] rounded-[16px] bg-lemonyellow text-black font-karla text-[18px] font-medium w-auto text-center"
             to="/booking"
+            aria-label="Reserve a table at Little Lemon restaurant"
           >
             Reserve a Table
           </Link>
@@ -25,7 +29,7 @@ const BannerSection = () => {
         <img
           className="rounded-2xl w-[394px] h-[415px] mt-[50px]"
           src={RestaurantFood}
-          alt="restaurnat food"
+          alt="Restaurant food served at Little Lemon"
           width={394}
           height={415}
         />

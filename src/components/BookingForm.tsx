@@ -69,239 +69,235 @@ const BookingForm = () => {
         Book a Table
       </h2>
       <form
-        className="flex flex-col gap-6 max-w-[860px] mx-auto bg-white text-black p-8 rounded-[16px] shadow-lg"
-        onSubmit={formik.handleSubmit}
+  className="flex flex-col gap-6 max-w-[860px] mx-auto bg-white text-black p-8 rounded-[16px] shadow-lg"
+  onSubmit={formik.handleSubmit}
+  aria-label="Booking form"
+>
+  {step === "1" ? (
+    <>
+      <div className="flex flex-col">
+        <label htmlFor="firstName" className="mb-2 font-medium">
+          First Name
+        </label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.firstName}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        />
+        {formik.touched.firstName && formik.errors.firstName ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.firstName}</span>
+        ) : null}
+      </div>
+
+      {/* Last Name */}
+      <div className="flex flex-col">
+        <label htmlFor="lastName" className="mb-2 font-medium">
+          Last Name
+        </label>
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.lastName}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        />
+        {formik.touched.lastName && formik.errors.lastName ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.lastName}</span>
+        ) : null}
+      </div>
+
+      {/* Email */}
+      <div className="flex flex-col">
+        <label htmlFor="email" className="mb-2 font-medium">
+          Email Address
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.email}</span>
+        ) : null}
+      </div>
+
+      {/* Continue Button */}
+      <button
+        onClick={() => setStep("2")}
+        className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] w-fit mx-auto transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black hover:border-2"
+        aria-label="Continue to next step"
       >
-        {step === "1" ? (
-          <>
-            <div className="flex flex-col">
-              <label htmlFor="firstName" className="mb-2 font-medium">
-                First Name
-              </label>
-              <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.firstName}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
-              {formik.touched.firstName && formik.errors.firstName ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.firstName}
-                </span>
-              ) : null}
-            </div>
+        Continue
+      </button>
+    </>
+  ) : step === "2" ? (
+    <>
+      <div className="flex flex-col">
+        <label htmlFor="date" className="mb-2 font-medium">
+          Choose Date
+        </label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.date}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        />
+        {formik.touched.date && formik.errors.date ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.date}</span>
+        ) : null}
+      </div>
 
-            {/* Last Name */}
-            <div className="flex flex-col">
-              <label htmlFor="lastName" className="mb-2 font-medium">
-                Last Name
-              </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.lastName}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
-              {formik.touched.lastName && formik.errors.lastName ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.lastName}
-                </span>
-              ) : null}
-            </div>
+      {/* Time */}
+      <div className="flex flex-col">
+        <label htmlFor="time" className="mb-2 font-medium">
+          Choose Time
+        </label>
+        <select
+          id="time"
+          name="time"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.time}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        >
+          <option value="">Select a time</option>
+          {availableTimes.map((time) => (
+            <option key={time} value={time}>
+              {time}
+            </option>
+          ))}
+        </select>
+        {formik.touched.time && formik.errors.time ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.time}</span>
+        ) : null}
+      </div>
 
-            {/* Email */}
-            <div className="flex flex-col">
-              <label htmlFor="email" className="mb-2 font-medium">
-                Email Address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
-              {formik.touched.email && formik.errors.email ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.email}
-                </span>
-              ) : null}
-            </div>
+      {/* Guests */}
+      <div className="flex flex-col">
+        <label htmlFor="guest" className="mb-2 font-medium">
+          Number of Guests
+        </label>
+        <input
+          id="guest"
+          name="guest"
+          type="number"
+          min="1"
+          max="20"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.guest}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        />
+        {formik.touched.guest && formik.errors.guest ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.guest}</span>
+        ) : null}
+      </div>
 
-            {/* continue Button */}
-            <button
-              onClick={() => setStep("2")}
-              className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] w-fit mx-auto transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black hover:border-2"
-            >
-              Continue
-            </button>
-          </>
-        ) : step === "2" ? (
-          <>
-            <div className="flex flex-col">
-              <label htmlFor="date" className="mb-2 font-medium">
-                Choose Date
-              </label>
-              <input
-                id="date"
-                name="date"
-                type="date"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.date}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
-              {formik.touched.date && formik.errors.date ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.date}
-                </span>
-              ) : null}
-            </div>
+      {/* Occasion */}
+      <div className="flex flex-col">
+        <label htmlFor="occasion" className="mb-2 font-medium">
+          Occasion
+        </label>
+        <select
+          id="occasion"
+          name="occasion"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.occasion}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
+          aria-required="true"
+        >
+          <option value="">Select an occasion</option>
+          <option value="birthday">Birthday</option>
+          <option value="anniversary">Anniversary</option>
+          <option value="engagement">Engagement</option>
+          <option value="other">Other</option>
+        </select>
+        {formik.touched.occasion && formik.errors.occasion ? (
+          <span className="text-red-600 text-sm mt-1">{formik.errors.occasion}</span>
+        ) : null}
+      </div>
 
-            {/* Time */}
-            <div className="flex flex-col">
-              <label htmlFor="time" className="mb-2 font-medium">
-                Choose Time
-              </label>
-              <select
-                id="time"
-                name="time"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.time}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              >
-                <option value="">Select a time</option>
-                {availableTimes.map((time) => (
-                  <option key={time} value={time}>
-                    {time}
-                  </option>
-                ))}
-              </select>
-              {formik.touched.time && formik.errors.time ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.time}
-                </span>
-              ) : null}
-            </div>
+      {/* Buttons */}
+      <div className="flex justify-center items-center gap-4">
+        <button
+          type="button"
+          onClick={() => setStep("1")}
+          className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
+          aria-label="Go back to previous step"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
+          aria-label="Submit booking form"
+        >
+          Submit
+        </button>
+      </div>
+    </>
+  ) : (
+    <>
+      <div className="flex flex-col items-center justify-center text-center p-10 rounded-2xl" role="status" aria-live="polite">
+        {/* Success Icon */}
+        <div className="w-16 h-16 rounded-full bg-[#48742C] flex items-center justify-center mb-6">
+          <svg
+            className="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
 
-            {/* Guests */}
-            <div className="flex flex-col">
-              <label htmlFor="guest" className="mb-2 font-medium">
-                Number of Guests
-              </label>
-              <input
-                id="guest"
-                name="guest"
-                type="number"
-                min="1"
-                max="20"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.guest}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
-              {formik.touched.guest && formik.errors.guest ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.guest}
-                </span>
-              ) : null}
-            </div>
+        {/* Success Message */}
+        <h3
+          role="heading"
+          aria-level={3}
+          data-testid="submit-success"
+          className="text-2xl font-semibold mb-2"
+        >
+          Reservation Confirmed!
+        </h3>
+        <p className="text-gray-700 mb-6">
+          Success 🎉 Your table will be ready when you show up.
+        </p>
 
-            {/* Occasion */}
-            <div className="flex flex-col">
-              <label htmlFor="occasion" className="mb-2 font-medium">
-                Occasion
-              </label>
-              <select
-                id="occasion"
-                name="occasion"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.occasion}
-                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              >
-                <option value="">Select an occasion</option>
-                <option value="birthday">Birthday</option>
-                <option value="anniversary">Anniversary</option>
-                <option value="engagement">Engagement</option>
-                <option value="other">Other</option>
-              </select>
-              {formik.touched.occasion && formik.errors.occasion ? (
-                <span className="text-red-600 text-sm mt-1">
-                  {formik.errors.occasion}
-                </span>
-              ) : null}
-            </div>
+        {/* Button */}
+        <button
+          onClick={() => (window.location.href = "/")}
+          className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
+          aria-label="Go to homepage"
+        >
+          Go Home
+        </button>
+      </div>
+    </>
+  )}
+</form>
 
-            {/* Buttons */}
-            <div className="flex justify-center items-center gap-4">
-              <button
-                type="button"
-                onClick={() => setStep("1")}
-                className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
-              >
-                Back
-              </button>
-              <button
-                type="submit"
-                className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
-              >
-                Submit
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="flex flex-col items-center justify-center text-center p-10 rounded-2xl">
-              {/* Success Icon */}
-              <div className="w-16 h-16 rounded-full bg-[#48742C] flex items-center justify-center mb-6">
-                <svg
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-
-              {/* Success Message */}
-              <h3
-                role="heading"
-                data-testid="submit-success"
-                className="text-2xl font-semibold mb-2"
-              >
-                Reservation Confirmed!
-              </h3>
-              <p className="text-gray-700 mb-6">
-                Success 🎉 Your table will be ready when you show up.
-              </p>
-
-              {/* Button */}
-              <button
-                onClick={() => (window.location.href = "/")}
-                className="px-6 py-3 bg-lemonyellow text-black font-medium rounded-[16px] transition cursor-pointer border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black"
-              >
-                Go Home
-              </button>
-            </div>
-          </>
-        )}
-      </form>
     </section>
   );
 };
