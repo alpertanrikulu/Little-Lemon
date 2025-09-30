@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const BookingForm = () => {
   const [step, setStep] = useState("1");
+  const [availableTimes, setAvailableTimes] = useState<string[]>([]);
 
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      date: "",
-      time: "",
-      guest: "",
-      occasion: "",
-    },
-    validationSchema: Yup.object({
+  useEffect(() => {
+    const times = fetchAPI(new Date());
+    setAvailableTimes(times);
+  }, []);
+
+  const getValidationSchema = (availableTimes: string[]) =>
+    Yup.object({
       firstName: Yup.string()
         .max(15, "Must be 15 characters or less")
         .required("Required"),
@@ -28,30 +25,41 @@ const BookingForm = () => {
         .required("Please choose a date"),
       time: Yup.string()
         .required("Please choose a time")
-        .test(
-          "is-valid-time",
-          "Time must be between 11:30 and 21:00",
-          (value) => {
-            if (!value) return false;
-            const [hours, minutes] = value.split(":").map(Number);
-            const totalMinutes = hours * 60 + minutes;
-
-            const minMinutes = 11 * 60 + 30; // 11:30
-            const maxMinutes = 21 * 60; // 21:00
-
-            return totalMinutes >= minMinutes && totalMinutes <= maxMinutes;
-          }
-        ),
+        .test("is-valid-time", "Invalid time selected", (value) => {
+          if (!value) return false;
+          return availableTimes.includes(value);
+        }),
       guest: Yup.number()
         .min(1, "At least 1 guest required")
         .max(20, "Maximum 20 guests allowed")
         .required("Please enter number of guests"),
       occasion: Yup.string()
-        .oneOf(["birthday", "anniversary", "engagement", "other"], "Invalid occasion")
+        .oneOf(
+          ["birthday", "anniversary", "engagement", "other"],
+          "Invalid occasion"
+        )
         .required("Please select an occasion"),
-    }),
-    onSubmit: () => {
-      setStep("3");
+    });
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      date: "",
+      time: "",
+      guest: "",
+      occasion: "",
+    },
+    validationSchema: getValidationSchema(availableTimes),
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      const success = submitAPI(values); // submitAPI çağrısı
+      if (success) {
+        setStep("3"); // Success ekranı
+      } else {
+        alert("Submission failed. Please try again.");
+      }
     },
   });
 
@@ -163,15 +171,21 @@ const BookingForm = () => {
               <label htmlFor="time" className="mb-2 font-medium">
                 Choose Time
               </label>
-              <input
+              <select
                 id="time"
                 name="time"
-                type="time"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.time}
                 className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lemongreen"
-              />
+              >
+                <option value="">Select a time</option>
+                {availableTimes.map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
               {formik.touched.time && formik.errors.time ? (
                 <span className="text-red-600 text-sm mt-1">
                   {formik.errors.time}
@@ -266,7 +280,11 @@ const BookingForm = () => {
               </div>
 
               {/* Success Message */}
-              <h3 role="heading" data-testid="submit-success" className="text-2xl font-semibold mb-2">
+              <h3
+                role="heading"
+                data-testid="submit-success"
+                className="text-2xl font-semibold mb-2"
+              >
                 Reservation Confirmed!
               </h3>
               <p className="text-gray-700 mb-6">

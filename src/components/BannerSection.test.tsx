@@ -6,6 +6,13 @@ import BannerSection from "./BannerSection";
 import userEvent from "@testing-library/user-event";
 import BookingForm from "./BookingForm";
 
+// test dosyanızın başına ekleyin
+global.fetchAPI = (date: Date) => {
+  return ["16:00", "17:00", "18:00"]; // testte kullanacağınız örnek saatler
+};
+
+global.submitAPI = (formData: any) => true; // testte submit başarılı olsun
+
 describe("Banner section", () => {
   it("renders Chicago heading", () => {
     render(
@@ -37,6 +44,7 @@ describe("Banner section", () => {
   //
   //
   it("should submit the form successfully and show success message", async () => {
+      
     render(
       <BrowserRouter>
         <BookingForm />
