@@ -46,6 +46,7 @@ const Card: React.FC<Props> = ({ image, title, price, description }) => {
               Your item has been successfully added.
             </p>
             <button
+              data-testid="order-count-button-continue"
               onClick={() => setIsOpen(false)}
               className="font-karla font-medium text-[16px] bg-lemonyellow text-black px-[16px] py-[8px] rounded-[16px] border-2 border-lemonyellow hover:bg-white hover:text-black hover:border-black transition"
             >
@@ -63,6 +64,7 @@ const Card: React.FC<Props> = ({ image, title, price, description }) => {
             <p>{description}</p>
             <div className="flex justify-between items-center">
               <button
+                data-testid="order-count-button"
                 onClick={() => {
                   setIsOpen(true);
                   setNewItemCount((count) => count + 1);
@@ -71,7 +73,7 @@ const Card: React.FC<Props> = ({ image, title, price, description }) => {
               >
                 Add to Basket
               </button>
-              {newItemCount ? <p className="font-karla font-medium text-[18px]">{newItemCount}</p> : <Package />}
+              {newItemCount ? <p data-testid="order-count" className="font-karla font-medium text-[18px]">{newItemCount}</p> : <Package />}
             </div>
           </>
         )}

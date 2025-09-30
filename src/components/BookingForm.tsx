@@ -47,7 +47,7 @@ const BookingForm = () => {
         .max(20, "Maximum 20 guests allowed")
         .required("Please enter number of guests"),
       occasion: Yup.string()
-        .oneOf(["birthday", "anniversary", "other"], "Invalid occasion")
+        .oneOf(["birthday", "anniversary", "engagement", "other"], "Invalid occasion")
         .required("Please select an occasion"),
     }),
     onSubmit: () => {
@@ -266,7 +266,7 @@ const BookingForm = () => {
               </div>
 
               {/* Success Message */}
-              <h3 className="text-2xl font-semibold mb-2">
+              <h3 role="heading" data-testid="submit-success" className="text-2xl font-semibold mb-2">
                 Reservation Confirmed!
               </h3>
               <p className="text-gray-700 mb-6">
